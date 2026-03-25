@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 13:28:18 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/24 13:36:08 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/25 12:52:05 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol.h"
@@ -58,4 +58,13 @@ char	*ft_ftoa(double n, int precision)
 	}
 	str[i] = '\0';
 	return (str);
+}
+
+void	rand_julia_gen(t_fractal *f)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	f->julia_cx = ((tv.tv_usec % 4000) - 2000) / 1000.0;
+	f->julia_cy = (((tv.tv_usec / 10) % 4000) - 2000) / 1000.0;
 }

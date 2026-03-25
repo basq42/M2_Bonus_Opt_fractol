@@ -1,6 +1,6 @@
 NAME		= fractol
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -O3
 
 # MLX42 Paths
 MLX_DIR		= ./MLX42
@@ -11,6 +11,7 @@ LIBFT_DIR	= ./libft
 LIBFT_LIB	= $(LIBFT_DIR)/libft.a
 
 # Includes
+HEADER		= includes/fractol.h
 INCLUDES	= -I$(MLX_DIR)/include -I$(LIBFT_DIR)
 
 # Flags for linking
@@ -27,10 +28,10 @@ $(LIBFT_LIB):
 $(MLX_LIB):
 	@cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
 
-$(NAME): $(OBJS)
+$(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

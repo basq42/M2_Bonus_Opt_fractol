@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:49:23 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/24 14:41:01 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/25 16:24:18 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # include "../libft/libft.h"
 # include <sys/time.h>
 
+/*
 # define WIDTH 800
 # define HEIGHT 800
-
+*/
 /* Struct for image buffering 
  * bits-per-pixel usually 32? 
  * Endianess indicates how color bytes are stored
@@ -50,6 +51,8 @@ typedef struct s_fractal
 	double		scale_x;
 	double		scale_y;
 	mlx_image_t	*text_img;
+	int32_t		width;
+	int32_t		height;
 }	t_fractal;
 
 typedef struct s_complex
@@ -68,8 +71,10 @@ uint32_t	get_colour(int iterations, int max_iterations);
 void		render_fractal(t_fractal *f);
 void		scroll_hook(double xdelta, double ydelta, void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
+void		size_hook(int32_t width, int32_t height, void *param);
 /*	utils	*/
 double		ft_atod(const char *str);
 void		ui_update(t_fractal *f);
 char		*ft_ftoa(double n, int precision);
+void		rand_julia_gen(t_fractal *f);
 #endif

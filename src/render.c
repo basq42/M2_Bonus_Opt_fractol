@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:09:11 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/24 14:45:10 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/25 14:17:36 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol.h"
@@ -81,10 +81,10 @@ void	render_fractal(t_fractal *f)
 
 	gettimeofday(&start, NULL);
 	y = 0;
-	while (y < HEIGHT)
+	while (y < f->height)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < f->width)
 		{
 			if (f->fractal_flg == 1)
 				calc_julia(f, x, y);
