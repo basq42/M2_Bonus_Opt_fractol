@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/26 12:38:15 by bkelav            #+#    #+#             */
+/*   Updated: 2026/03/26 12:39:29 by bkelav           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_digit_count_int(int n)
@@ -19,7 +31,7 @@ int	ft_digit_count_int(int n)
 
 size_t	ft_digit_count_uint(unsigned int un)
 {
-	size_t		count;
+	size_t			count;
 	unsigned int	tmp;
 
 	count = 0;
@@ -36,7 +48,7 @@ size_t	ft_digit_count_uint(unsigned int un)
 
 size_t	ft_digit_count_hex(unsigned int un)
 {
-	size_t	count;
+	size_t			count;
 	unsigned int	tmp;
 
 	count = 0;
@@ -57,7 +69,7 @@ size_t	ft_digit_count_hex(unsigned int un)
  */
 size_t	ft_digit_count_ptr(unsigned long long ulln)
 {
-	size_t	count;
+	size_t				count;
 	unsigned long long	tmp;
 
 	count = 0;

@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkelav <bkelav@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:09:11 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 13:22:24 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/26 15:33:30 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 /* higher multiplier = more rapid colour cycle
 * =========================================================================
@@ -41,7 +41,7 @@
 * = 0xAABBCCFF
 * =========================================================================
 */
-uint32_t	get_colour(int iterations, int max_iterations)
+uint32_t	get_colour(int iterations, int max_iterations, int scheme)
 {
 	uint8_t	r;
 	uint8_t	g;
@@ -49,10 +49,26 @@ uint32_t	get_colour(int iterations, int max_iterations)
 
 	if (iterations == max_iterations)
 		return (0x000000FF);
-	r = (iterations * 5) % 256;
-	g = (iterations * 7) % 256;
-	b = (iterations * 11) % 256;
+	if (scheme == 0)
+	{
+		r = (iterations * 5) % 256;
+		g = (iterations * 7) % 256;
+		b = (iterations * 11) % 256;
+	}
+	else if (scheme == 1)
+	{
+		r = (iterations * 15) % 256;
+		g = (iterations * 7) % 256;
+		b = (iterations * 2) % 256;
+	}
+	else
+	{
+		r = (iterations * 2) % 256;
+		g = (iterations * 10) % 256;
+		b = (iterations * 20) % 256;
+	}
 	return (r << 24 | g << 16 | b << 8 | 0xFF);
+
 }
 
 /* mlx_put_pixel checks bounds each call
@@ -85,14 +101,15 @@ void	render_fractal(t_fractal *f)
 				calc_julia(f, x, y);
 			else if (f->fractal_flg == 0)
 				calc_mandelbrot(f, x, y);
+			else if (f->fractal_flg == 2)
+				calc_burning_ship(f, x, y);
 			x++;
 		}
 		y++;
 	}
 }
 /*
- * Zoom and Lag Tracking:
- *
+ * Zoom and Lag Tracking
 	struct timeval	start;
 	struct timeval	end;
 	long			ms;

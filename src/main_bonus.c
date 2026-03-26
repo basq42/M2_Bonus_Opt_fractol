@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:48:50 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 13:01:27 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/26 14:46:24 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 static void	print_exit(void)
 {
 	ft_putstr_fd("|Options:\n", 1);
 	ft_putstr_fd("	mandelbrot\n", 1);
 	ft_putstr_fd("	julia\n", 1);
+	ft_putstr_fd("	burning_ship\n", 1);
 	ft_putstr_fd("|Usage:\n", 1);
 	ft_putstr_fd(" |Mandelbrot:\n", 1);
 	ft_putstr_fd("./fractol mandelbrot\n", 1);
+	ft_putstr_fd(" |Burning Ship:\n", 1);
+	ft_putstr_fd("./fractol burning_ship\n", 1);
 	ft_putstr_fd(" |Julia:\n", 1);
 	ft_putstr_fd("./fractol julia <real> <imaginary>\n", 1);
 	ft_putstr_fd("Some Examples for Julia:\n", 1);
@@ -40,6 +43,7 @@ static void	init_fractal(t_fractal *f)
 	f->shift_y = 0.0;
 	f->max_iterations = 100;
 	f->text_img = NULL;
+	f->scheme = 0;
 	f->mlx = mlx_init(f->width, f->height, "fract'ol", true);
 	if (!f->mlx)
 	{
@@ -67,6 +71,8 @@ static void	which_fractal(int argc, char **argv, t_fractal *fractal)
 		fractal->julia_cx = ft_atod(argv[2]);
 		fractal->julia_cy = ft_atod(argv[3]);
 	}
+	else if (argc == 2 && !ft_strncmp(argv[1], "burning_ship", 13))
+		fractal->fractal_flg = 2;
 	else
 		print_exit();
 }

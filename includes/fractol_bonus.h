@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fractol_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:49:23 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 13:04:49 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/26 14:48:20 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTOL_BONUS_H
+# define FRACTOL_BONUS_H
 
 # include <MLX42/MLX42.h>
 # include <math.h>
@@ -53,6 +53,7 @@ typedef struct s_fractal
 	mlx_image_t	*text_img;
 	int32_t		width;
 	int32_t		height;
+	int			scheme;
 }	t_fractal;
 
 typedef struct s_complex
@@ -64,9 +65,10 @@ typedef struct s_complex
 /*	fractol_sets.c	*/
 void		calc_mandelbrot(t_fractal *f, int x, int y);
 void		calc_julia(t_fractal *f, int x, int y);
+void		calc_burning_ship(t_fractal *f, int x, int y);
 /*	render.c	*/
 void		opt_pixel_put(mlx_image_t *img, int x, int y, uint32_t colour);
-uint32_t	get_colour(int iterations, int max_iterations);
+uint32_t	get_colour(int iterations, int max_iterations, int scheme);
 void		render_fractal(t_fractal *f);
 void		scroll_hook(double xdelta, double ydelta, void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
@@ -74,4 +76,6 @@ void		size_hook(int32_t width, int32_t height, void *param);
 /*	utils	*/
 double		ft_atod(const char *str);
 //void		ui_update(t_fractal *f);
+//char		*ft_ftoa(double n, int precision);
+//void		rand_julia_gen(t_fractal *f);
 #endif

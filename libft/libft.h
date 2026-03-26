@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 13:15:14 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/21 17:36:49 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/26 12:37:50 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_print_uint(unsigned int un);
 int		ft_digit_count_int(int n);
 size_t	ft_digit_count_uint(unsigned int un);
 size_t	ft_digit_count_hex(unsigned int un);
-size_t ft_digit_count_ptr(unsigned long long ulln);
+size_t	ft_digit_count_ptr(unsigned long long ulln);
 /* Character Check and Conversion */
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

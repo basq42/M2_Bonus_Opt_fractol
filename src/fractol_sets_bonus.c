@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol_sets.c                                     :+:      :+:    :+:   */
+/*   fractol_sets_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:48:58 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 12:35:07 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/26 14:51:45 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 /*	Later for bonus do f->zoom + f->shift_* */
 /*	Core equation: Z(n+1) = Z(n)^2 + c
@@ -60,7 +60,7 @@ void	calc_mandelbrot(t_fractal *f, int x, int y)
 			old = z;
 		iter++;
 	}
-	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations));
+	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations, f->scheme));
 }
 
 /*	Same core as mandelbrot but:
@@ -91,7 +91,7 @@ void	calc_julia(t_fractal *f, int x, int y)
 			old = z;
 		iter++;
 	}
-	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations));
+	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations, f->scheme));
 }
 
 /* The core equation is: Z(n+1) = (|Re(Z)| + i|Im(Z)|)^2 + c
@@ -125,5 +125,5 @@ void	calc_burning_ship(t_fractal *f, int x, int y)
 			old = z;
 		iter++;
 	}
-	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations));
+	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations, f->scheme));
 }

@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:03:04 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 13:03:28 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/26 13:24:44 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/fractol.h"
+#include "../includes/fractol_bonus.h"
 
 static void	skip_ws(const char *str, int *i)
 {
