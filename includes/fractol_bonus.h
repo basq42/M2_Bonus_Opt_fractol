@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:49:23 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 14:48:20 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/28 14:38:17 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void		calc_julia(t_fractal *f, int x, int y);
 void		calc_burning_ship(t_fractal *f, int x, int y);
 /*	render.c	*/
 void		opt_pixel_put(mlx_image_t *img, int x, int y, uint32_t colour);
+void		pick_scheme(uint8_t *r, uint8_t *g, uint8_t *b, int iter, int scheme);
 uint32_t	get_colour(int iterations, int max_iterations, int scheme);
 void		render_fractal(t_fractal *f);
 void		scroll_hook(double xdelta, double ydelta, void *param);

@@ -6,10 +6,11 @@
 /*   By: bkelav <bkelav@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:09:11 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 15:33:30 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/28 16:19:36 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol_bonus.h"
+#include <stdio.h>
 
 /* higher multiplier = more rapid colour cycle
 * =========================================================================
@@ -41,6 +42,28 @@
 * = 0xAABBCCFF
 * =========================================================================
 */
+void	pick_scheme(uint8_t *r, uint8_t *g, uint8_t *b, int iterations, int scheme)
+{
+	if (scheme == 0)
+	{
+		*r = (iterations * 5) % 256;
+		*g = (iterations * 7) % 256;
+		*b = (iterations * 11) % 256;
+	}
+	else if (scheme == 1)
+	{
+		*r = (iterations * 15) % 256;
+		*g = (iterations * 7) % 256;
+		*b = (iterations * 2) % 256;
+	}
+	else
+	{
+		*r = (iterations * 2) % 256;
+		*g = (iterations * 10) % 256;
+		*b = (iterations * 20) % 256;
+	}
+}
+
 uint32_t	get_colour(int iterations, int max_iterations, int scheme)
 {
 	uint8_t	r;
@@ -49,26 +72,8 @@ uint32_t	get_colour(int iterations, int max_iterations, int scheme)
 
 	if (iterations == max_iterations)
 		return (0x000000FF);
-	if (scheme == 0)
-	{
-		r = (iterations * 5) % 256;
-		g = (iterations * 7) % 256;
-		b = (iterations * 11) % 256;
-	}
-	else if (scheme == 1)
-	{
-		r = (iterations * 15) % 256;
-		g = (iterations * 7) % 256;
-		b = (iterations * 2) % 256;
-	}
-	else
-	{
-		r = (iterations * 2) % 256;
-		g = (iterations * 10) % 256;
-		b = (iterations * 20) % 256;
-	}
+	pick_scheme(&r, &g, &b, iterations, scheme);
 	return (r << 24 | g << 16 | b << 8 | 0xFF);
-
 }
 
 /* mlx_put_pixel checks bounds each call
@@ -90,7 +95,11 @@ void	render_fractal(t_fractal *f)
 {
 	int				x;
 	int				y;
+	struct timeval	start;
+	struct timeval	end;
+	long			ms;
 
+	gettimeofday(&start, NULL);
 	y = 0;
 	while (y < f->height)
 	{
@@ -107,6 +116,9 @@ void	render_fractal(t_fractal *f)
 		}
 		y++;
 	}
+	gettimeofday(&end, NULL);
+	ms = (end.tv_sec - start.tv_sec) * 1000 + (end.tv_usec - start.tv_usec) / 1000;
+	printf("Render time: %ld ms\n", ms);
 }
 /*
  * Zoom and Lag Tracking
