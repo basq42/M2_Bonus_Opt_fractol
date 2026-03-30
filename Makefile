@@ -23,7 +23,7 @@ OBJS			= $(SRCS:.c=.o)
 
 # Bonus Files
 HEADER_BONUS	= includes/fractol_bonus.h
-SRCS_BONUS		= src/main_bonus.c src/render_bonus.c src/utils_bonus.c src/event_hooks_bonus.c src/fractol_sets_bonus.c
+SRCS_BONUS		= src/main_bonus.c src/render_bonus.c src/utils_bonus.c src/event_hooks_bonus.c src/mandelbrot_set_bonus.c src/julia_set_bonus.c src/burning_ship_bonus.c
 OBJS_BONUS		= $(SRCS_BONUS:.c=.o)
 
 all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)

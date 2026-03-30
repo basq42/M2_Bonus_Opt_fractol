@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:09:11 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/30 14:24:04 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/30 15:08:05 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol_bonus.h"
@@ -41,7 +41,7 @@
 * = 0xAABBCCFF
 * =========================================================================
 */
-static void	pick_scheme(int iterations, int scheme)
+static uint32_t	pick_scheme(int iterations, int scheme)
 {
 	uint8_t	r;
 	uint8_t	g;
@@ -65,7 +65,7 @@ static void	pick_scheme(int iterations, int scheme)
 		g = (iterations * 10) % 256;
 		b = (iterations * 20) % 256;
 	}
-	return (r << 24 | g << 16 | b << 8 | 0xFF);
+	return ((uint32_t)r << 24 | (uint32_t)g << 16 | (uint32_t)b << 8 | 0xFF);
 }
 
 uint32_t	get_colour(int iterations, int max_iterations, int scheme)
