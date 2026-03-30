@@ -6,40 +6,12 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:48:58 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/28 16:51:04 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/30 14:12:57 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol_bonus.h"
 
-/*	Later for bonus do f->zoom + f->shift_* */
-/*	Core equation: Z(n+1) = Z(n)^2 + c
- *	For mandelbrot Z always starts at 0
- *	and the constant c represents the actual coordinate
- *	of the pixel in complex plane
- *	Complex Number Squaring with i^2=-1:
- *		(x + iy)^2 = (x^2 - y^2) + (2xy)i
- *	Escape radius set to 2
- *		avoid slow sqrt() function
- *	*/
-/*	
-	while ((z.r * z.r) + (z.i * z.i) <= 4.0 && iter < f->max_iterations)
-	{
-		tmp_zr = (z.r * z.r) - (z.i * z.i) + c.r;
-		z.i = (2.0 * z.r * z.i) + c.i;
-		z.r = tmp_zr;
-		iter++;
-	}
-	this was slow due to 6 multplctns per pixel
-	instead now caching squared vals into new variables
-	and hence down to 4 multiplications
- * */
-/*	on top of periodicity, adding cardioid and bulb checks:
- *	a point is definetively inside the cardioid if:
- *		q * (q + (x - 0.25)) <= 0.25 * y^2
- *	a point is inside the circular bulb (left) definetively if:
- *	(x + 1)^2 + y^2 <= 0.0625
- * */
 static int	mandel_checks(double cr, double ci)
 {
 	double	q;
@@ -90,10 +62,10 @@ void	calc_mandelbrot(t_fractal *f, int x, int y)
 	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations, f->scheme));
 }
 
-/*	Same core as mandelbrot but:
- *		constant c remains same for all pixels
- *		instead Z changes
- *		*/
+/*	Symetry check for julia?
+ *	if (f->shift_x == 0.0 && f->shift_y == 0.0)
+		opt_pixel_put(f->img, f->width - 1 - x, f->height - 1 - y, f->scheme);
+*/
 void	calc_julia(t_fractal *f, int x, int y)
 {
 	t_complex	z;
@@ -121,11 +93,6 @@ void	calc_julia(t_fractal *f, int x, int y)
 	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations, f->scheme));
 }
 
-/* The core equation is: Z(n+1) = (|Re(Z)| + i|Im(Z)|)^2 + c
-	using fabs() to get absolute values
-		real part is same as mandelbrot due to |x|^2=x^2
-		img part in absolute
- */
 void	calc_burning_ship(t_fractal *f, int x, int y)
 {
 	t_complex	c;

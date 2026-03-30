@@ -6,11 +6,10 @@
 /*   By: bkelav <bkelav@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:09:11 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/28 16:19:36 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/30 14:24:04 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol_bonus.h"
-#include <stdio.h>
 
 /* higher multiplier = more rapid colour cycle
 * =========================================================================
@@ -42,38 +41,38 @@
 * = 0xAABBCCFF
 * =========================================================================
 */
-void	pick_scheme(uint8_t *r, uint8_t *g, uint8_t *b, int iterations, int scheme)
-{
-	if (scheme == 0)
-	{
-		*r = (iterations * 5) % 256;
-		*g = (iterations * 7) % 256;
-		*b = (iterations * 11) % 256;
-	}
-	else if (scheme == 1)
-	{
-		*r = (iterations * 15) % 256;
-		*g = (iterations * 7) % 256;
-		*b = (iterations * 2) % 256;
-	}
-	else
-	{
-		*r = (iterations * 2) % 256;
-		*g = (iterations * 10) % 256;
-		*b = (iterations * 20) % 256;
-	}
-}
-
-uint32_t	get_colour(int iterations, int max_iterations, int scheme)
+static void	pick_scheme(int iterations, int scheme)
 {
 	uint8_t	r;
 	uint8_t	g;
 	uint8_t	b;
 
+	if (scheme == 0)
+	{
+		r = (iterations * 5) % 256;
+		g = (iterations * 7) % 256;
+		b = (iterations * 11) % 256;
+	}
+	else if (scheme == 1)
+	{
+		r = (iterations * 15) % 256;
+		g = (iterations * 7) % 256;
+		b = (iterations * 2) % 256;
+	}
+	else
+	{
+		r = (iterations * 2) % 256;
+		g = (iterations * 10) % 256;
+		b = (iterations * 20) % 256;
+	}
+	return (r << 24 | g << 16 | b << 8 | 0xFF);
+}
+
+uint32_t	get_colour(int iterations, int max_iterations, int scheme)
+{
 	if (iterations == max_iterations)
 		return (0x000000FF);
-	pick_scheme(&r, &g, &b, iterations, scheme);
-	return (r << 24 | g << 16 | b << 8 | 0xFF);
+	return (pick_scheme(iterations, scheme));
 }
 
 /* mlx_put_pixel checks bounds each call
@@ -88,18 +87,20 @@ void	opt_pixel_put(mlx_image_t *img, int x, int y, uint32_t colour)
 	offset = (y * img->width + x) * 4;
 	img->pixels[offset] = (colour >> 24) & 0xFF;
 	img->pixels[offset + 1] = (colour >> 16) & 0xFF;
+	img->pixels[offset + 2] = (colour >> 8) & 0xFF;
 	img->pixels[offset + 3] = (colour) & 0xFF;
 }
 
+/*	symettry check for julia?
+ *	y_max = f->height;
+	if (f->fractal_flg == 1 && f->shift_x == 0.0 && f->shift_y == 0.0)
+	y_max = f->height / 2;
+*/
 void	render_fractal(t_fractal *f)
 {
 	int				x;
 	int				y;
-	struct timeval	start;
-	struct timeval	end;
-	long			ms;
 
-	gettimeofday(&start, NULL);
 	y = 0;
 	while (y < f->height)
 	{
@@ -116,9 +117,6 @@ void	render_fractal(t_fractal *f)
 		}
 		y++;
 	}
-	gettimeofday(&end, NULL);
-	ms = (end.tv_sec - start.tv_sec) * 1000 + (end.tv_usec - start.tv_usec) / 1000;
-	printf("Render time: %ld ms\n", ms);
 }
 /*
  * Zoom and Lag Tracking
@@ -130,6 +128,6 @@ void	render_fractal(t_fractal *f)
 	gettimeofday(&end, NULL);
 	ms = (end.tv_sec - start.tv_sec) * 1000 + ->*
 	*-> (end.tv_usec - start.tv_usec) / 1000;
-	printf("Render time: %ld ms\n", ms);
+	printf("Zoom: %f | Render: %ld ms\n", f->zoom, ms);
 	ui_update(f);
 */

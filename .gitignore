@@ -1,2 +1,5 @@
 tag*
 *.o
+*.log
+*.csv
+*.sh
