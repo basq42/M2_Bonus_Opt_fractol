@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:49:23 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/30 15:36:36 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/30 15:55:55 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void		key_hook(mlx_key_data_t keydata, void *param);
 void		size_hook(int32_t width, int32_t height, void *param);
 /*	utils_bonus.c	*/
 double		ft_atod(const char *str);
+void		scale_update(t_fractal *f);
 
 #endif

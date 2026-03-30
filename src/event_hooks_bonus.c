@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:18:25 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 15:32:16 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/30 16:00:01 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol_bonus.h"
@@ -33,8 +33,7 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 		f->zoom *= 0.9;
 	else if (ydelta < 0)
 		f->zoom *= 1.1;
-	f->scale_x = f->zoom / (f->width / 4.0);
-	f->scale_y = f->zoom / (f->height / 4.0);
+	scale_update(f);
 	f->shift_x = mouse_r - ((x - f->width / 2.0) * f->scale_x);
 	f->shift_y = mouse_i - ((y - f->height / 2.0) * f->scale_y);
 	render_fractal(f);
@@ -63,7 +62,6 @@ void	size_hook(int32_t width, int32_t height, void *param)
 	f->width = width;
 	f->height = height;
 	mlx_resize_image(f->img, f->width, f->height);
-	f->scale_x = f->zoom / (f->width / 4.0);
-	f->scale_y = f->zoom / (f->height / 4.0);
+	scale_update(f);
 	render_fractal(f);
 }

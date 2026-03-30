@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:03:04 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 13:03:28 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/30 15:53:36 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol.h"
@@ -61,6 +61,17 @@ double	ft_atod(const char *str)
 	}
 	precision(str, &i, &result, &fraction);
 	return ((result / fraction) * sign);
+}
+
+void	scale_update(t_fractal *f)
+{
+	double	min_side;
+
+	min_side = f->width;
+	if (f->height < f->width)
+		min_side = f->height;
+	f->scale_x = f->zoom / (min_side / 4.0);
+	f->scale_y = f->zoom / (min_side / 4.0);
 }
 /*
 void	ui_update(t_fractal *f)
