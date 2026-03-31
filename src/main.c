@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:48:50 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/26 13:01:27 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:57:31 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ static void	init_fractal(t_fractal *f)
 	f->width = 800;
 	f->height = 800;
 	f->zoom = 1.0;
-	f->shift_x = 0.0;
-	f->shift_y = 0.0;
 	f->max_iterations = 100;
-	f->text_img = NULL;
 	f->mlx = mlx_init(f->width, f->height, "fract'ol", true);
 	if (!f->mlx)
 	{

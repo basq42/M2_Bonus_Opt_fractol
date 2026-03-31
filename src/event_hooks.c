@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 15:18:25 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/30 15:59:45 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:07:45 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/fractol.h"
@@ -30,8 +30,6 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	render_fractal(f);
 }
 
-/*f->max_iterations = 42 + (int)(1.0 / f->zoom * 10);
-*/
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_fractal	*f;

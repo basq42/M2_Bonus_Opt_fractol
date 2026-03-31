@@ -6,19 +6,11 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:48:58 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/30 15:34:45 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/03/31 13:53:33 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol_bonus.h"
-
-static void	period_check(t_complex *z, t_complex *old, int *iter, t_fractal *f)
-{
-	if (z->r == old->r && z->i == old->i)
-		*iter = f->max_iterations - 1;
-	if ((*iter & 31) == 0)
-		*old = *z;
-}
 
 static void	map_complex(t_fractal *f, int x, int y, t_complex *c)
 {
@@ -45,7 +37,6 @@ void	calc_burning_ship(t_fractal *f, int x, int y)
 		z.r = z2.r - z2.i + c.r;
 		z2.r = z.r * z.r;
 		z2.i = z.i * z.i;
-		period_check(&z, &old, &iter, f);
 		iter++;
 	}
 	opt_pixel_put(f->img, x, y, get_colour(iter, f->max_iterations, f->scheme));
