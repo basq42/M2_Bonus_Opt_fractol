@@ -120,10 +120,6 @@ To compile with the bonus features (Burning Ship, adaptive zoom, dynamic colors)
 ```bash
 make bonus
 ```
-Additionally, valgrind rule can be used;
-```
-
-```
 
 ### Execution
 The program requires specific command-line parameters to determine which fractal to display. 
@@ -152,16 +148,16 @@ The Julia set requires two additional parameters defining the real and imaginary
 * **ESC / Window Cross:** Cleanly exit the program.
 
 ### Memory Testing (Valgrind)
-[cite_start]The Makefile includes a `valgrind` rule to test the executable for memory leaks and memory errors using full tracking parameters[cite: 3].
+The Makefile includes a `valgrind` rule to test the executable for memory leaks and memory errors using full tracking parameters.
 
-[cite_start]By default, executing `make valgrind` will run the `mandelbrot` parameter[cite: 3]. [cite_start]You can test specific fractals or pass specific coordinates by overriding the `ARGS` variable directly in the command line[cite: 3]:
+By default, executing `make valgrind` will run the `mandelbrot` parameter. You can test specific fractals or pass specific coordinates by overriding the `ARGS` variable directly in the command line:
 
 ```bash
 make valgrind ARGS="julia -0.8 0.156"
 ```
 
 **Testing Bonus Features:**
-[cite_start]Both the mandatory and bonus rules compile into the exact same executable name (`fractol`)[cite: 1, 3]. [cite_start]If you want to run Valgrind on the bonus features (such as `burning_ship`), you must strictly compile the bonus objects first by running `make bonus` before calling the memory test[cite: 1, 3]:
+Both the mandatory and bonus rules compile into the exact same executable name (`fractol`). If you want to run Valgrind on the bonus features (such as `burning_ship`), you need to compile the bonus objects first by running `make bonus` before calling the memory test:
 
 ```bash
 make bonus
