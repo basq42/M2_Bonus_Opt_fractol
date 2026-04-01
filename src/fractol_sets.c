@@ -6,7 +6,7 @@
 /*   By: bkelav <bkelav@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/22 12:48:58 by bkelav            #+#    #+#             */
-/*   Updated: 2026/03/31 13:08:09 by bkelav           ###   ########.fr       */
+/*   Updated: 2026/04/01 12:14:15 by bkelav           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	calc_mandelbrot(t_fractal *f, int x, int y)
 	int			iter;
 
 	if (mandel_checks(c.r, c.i))
-			return (opt_pixel_put(f->img, x, y, 0x000000FF));
+		return (opt_pixel_put(f->img, x, y, 0x000000FF));
 	map_complex(f, x, y, &c);
 	z = (t_complex){0, 0};
 	z2 = (t_complex){0, 0};
